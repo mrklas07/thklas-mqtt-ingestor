@@ -80,3 +80,18 @@ function deberiaGuardarEnBD(generador_id) {
     }
     return false;
 }
+
+// --- MINI SERVIDOR HTTP PARA RENDER ---
+// Render requiere que un Web Service escuche en un puerto, de lo contrario apagará la app.
+const http = require('http');
+const port = process.env.PORT || 3000;
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Ingestor MQTT de Thklas está activo y escuchando.\n');
+});
+
+server.listen(port, () => {
+    console.log(`Servidor web de respaldo escuchando en el puerto ${port}`);
+});
